@@ -39,15 +39,17 @@ const updateCompletionStatus = async (req, res) => {
   const { taskId } = req.params;
 
   try {
-    const updatedTask = await Task.findByIdAndUpdate(
-      taskId,
-      { $set: { completed: req.body.completed } }, // Use the value sent in the body
-      { new: true }
-    );
+    const task = await Task.findById(taskId);
 
-    if (!updatedTask) {
+    if (!task) {
       return res.status(404).json({ error: true, message: "Task not found" });
     }
+
+    const updatedTask = await Task.findByIdAndUpdate(
+      taskId,
+      { $set: { completed: !task.completed } },
+      { new: true }
+    );
 
     return res.status(200).json({ error: false, task: updatedTask });
   } catch (err) {
