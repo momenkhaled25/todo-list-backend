@@ -9,7 +9,15 @@ const tasksRouter = require("./routes/tasksRoute");
 
 // Middlewares
 app.use(express.json());
-app.use(cors());
+// CORS options
+const corsOptions = {
+  origin: "http://your-allowed-origin.com",
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+// Use CORS with options
+app.use(cors(corsOptions));
 
 //api routes
 app.use("/user", userRouter);
