@@ -11,7 +11,7 @@ const tasksRouter = require("./routes/tasksRoute");
 app.use(express.json());
 // CORS options
 const corsOptions = {
-  origin: "http://your-allowed-origin.com",
+  origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
